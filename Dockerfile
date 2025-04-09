@@ -1,12 +1,19 @@
-# Use Java 21 base image
-FROM eclipse-temurin:21-jdk
+# Stage 1: Build the JAR
+FROM gradle:8.5-jdk21 AS builder
 
-LABEL maintainer="your-name"
+WORKDIR /app
+COPY . .
+
+# Build the Spring Boot JAR
+RUN ./gradlew clean bootJar
+
+# Stage 2: Run the app
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# Copy dynamically named JAR from build output
-COPY build/libs/student-service-*.jar app.jar
+# Copy the built JAR from the builder stage
+COPY --from=builder /app/build/libs/student-service-*.jar app.jar
 
 EXPOSE 1000
 
