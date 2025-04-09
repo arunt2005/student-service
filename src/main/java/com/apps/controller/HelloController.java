@@ -10,6 +10,7 @@ public class HelloController {
     public String welcome() {
         System.out.println("hello world...simple message.");
         System.out.println("updated message.");
+        System.out.println("what a beautiful controller...!!!");
         return "welcome";
     }
 
