@@ -4,6 +4,9 @@ FROM gradle:8.5-jdk21 AS builder
 WORKDIR /app
 COPY . .
 
+# ✅ Fix permission issue for gradlew
+RUN chmod +x ./gradlew
+
 # Build the Spring Boot JAR
 RUN ./gradlew clean bootJar
 
