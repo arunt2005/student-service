@@ -28,7 +28,7 @@ jobs:
       run: ./gradlew clean build
 
     - name: Archive Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: spring-boot-jar
         path: build/libs/*.jar
